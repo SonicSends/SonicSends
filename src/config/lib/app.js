@@ -1,9 +1,7 @@
 module.exports.start = () => {
     const app = require("./express")();
-
-    const port = 5000;
-
-    app.listen(port, () => {
-        console.log(`Running on the ${port}...`);
+    const chalk=require("chalk");
+    app.listen(app.get('port'), () => {
+        console.log(chalk.bgGray('Server running on port %s in %s mode...'),app.get('port'),app.settings.env);
     });
 };

@@ -1,0 +1,19 @@
+const NodeCache = require("node-cache");
+const cache = new NodeCache();
+
+
+const getValue = (key) => {
+    return process.env[key] || cache.get(key);
+}
+
+const setValue = (key, value) => {
+    cache.set(key, value);
+}
+
+const getAllKeys = () => {
+    return cache.keys();
+}
+
+module.exports.getValue = getValue;
+module.exports.setValue = setValue;
+module.exports.getAllKeys = getAllKeys;

@@ -1,9 +1,12 @@
 const path = require("path");
+const chalk = require('chalk');
 
-const init = () => {
+const init = async () => {
+    const config = require(path.join(process.cwd(), "src/config"));
+    await config.initEnvVariables();
+
     const sequelize = require(path.join(process.cwd(), "src/config/lib/sequelize"));
-
-    sequelize.query("CREATE DATABASE IF NOT EXISTS blog", (err, res) => {
+    await sequelize.query("CREATE DATABASE IF NOT EXISTS short_muvi", (err, res) => {
         if (err) {
             console.log(err);
         } else {
@@ -11,11 +14,12 @@ const init = () => {
         }
     });
 
-    require(path.join(process.cwd(), "src/modules/admin/admin.model.js"));
+    const User = require(path.join(process.cwd(),'src/modules/platform/user/user.model.js'));
 
-    sequelize.sync()
-        .then(() => console.log("success"))
-        .catch((err) => console.log(err));
+    await sequelize.sync();
+    console.log(chalk.bgGreen('Seeding Success !'));
+
+
 };
 
 init();

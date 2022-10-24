@@ -4,9 +4,9 @@ const path = require("path");
 
 function getGlobbedPaths(globPatterns, excludes) {
     let urlRegex = new RegExp("^(?:[a-z]+:)?//", "i");
-  
+
     let output = [];
-  
+
     if (_.isArray(globPatterns)) {
         globPatterns.forEach(function (globPattern) {
             output = _.union(output, getGlobbedPaths(globPattern, excludes));
@@ -17,30 +17,33 @@ function getGlobbedPaths(globPatterns, excludes) {
         } else {
             let files = glob.sync(globPatterns);
             if (excludes) {
-            files = files.map(function (file) {
-                if (_.isArray(excludes)) {
-                for (let i in excludes) {
-                    if (excludes.hasOwnProperty(i)) {
-                    file = file.replace(excludes[i], "");
+                files = files.map(function (file) {
+                    if (_.isArray(excludes)) {
+                        for (let i in excludes) {
+                            if (excludes.hasOwnProperty(i)) {
+                                file = file.replace(excludes[i], "");
+                            }
+                        }
+                    } else {
+                        file = file.replace(excludes, "");
                     }
-                }
-                } else {
-                file = file.replace(excludes, "");
-                }
-                return file;
-            });
+                    return file;
+                });
             }
             output = _.union(output, files);
         }
     }
-  
+
     return output;
 };
+// function for init environment variable
+const initEnvVariables = async () => {
+    require('dotenv').config();
 
+}
 
 const getGlobalConfig = () => {
     const assets = require(path.join(process.cwd(), "src/config/assets/default.js"));
-
     const config = {
         routes: getGlobbedPaths(assets.routes)
     };
@@ -49,3 +52,4 @@ const getGlobalConfig = () => {
 };
 
 module.exports.getGlobalConfig = getGlobalConfig;
+module.exports.initEnvVariables = initEnvVariables;
