@@ -1,33 +1,37 @@
+# SonicSends
+
+> A web backend for sending large files to users instantly without any hassle.
+
+### Setup
+
+The following steps will walk you through installation on a Linux. Mac should be similar.
+It's also possible to up and running on a Windows machine.
+
+#### Dependencies
+
+###### Prerequisites
+
+- Node ^16.x
+- PostgreSQL ^12.x
+- Express ^4.18.1
+
+Install dependencies on your system then follow the commands:
+`yarn` or `npm install`
+
+> Then create a `.env` file and paste code from `.env-example` file and update by valid information.
+
+After that please run following commands for up and running in local development server:
+
+```bash
+yarn start
 ```
-git init
-git remote add origin <link>
-git add .
-git status
-git commit -m "Add First Commit"
-git branch
-git branch <your name>/first-project
-git switch <your name>/first-project
-git push origin <your name>/first-project
-git log --oneline
 
-cd <directory>
-cd ..
-ls
-ls -a
+Or
 
-git add .
-$ git commit -m <commit msg>
-
-$ git fetch
-$ git rebase origin/develop
-
-$ git push --force-with-lease origin <your branch>
-
-$ git pull --rebase origin develop
-
-$ git fetch
-$ git merge origin/develop
-$ git pull origin develop
-
-
+```bash
+npm start
 ```
+
+#### See development version
+
+You can find up and running the development version on http://localhost:<your-port>
